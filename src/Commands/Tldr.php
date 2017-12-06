@@ -2,7 +2,7 @@
 
 namespace BrainMaestro\Tldr\Commands;
 
-use BrainMaestro\Tldr\Page;
+use BrainMaestro\Tldr\Cache;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
@@ -50,11 +50,11 @@ class Tldr extends Command
         $page = $input->getArgument('page');
 
         if ($input->getOption('clear-cache')) {
-            return Page::clearCache();
+            return Cache::clear();
         }
 
         if ($input->getOption('update')) {
-            Page::update();
+            Cache::update();
             return;
         }
 
@@ -63,7 +63,7 @@ class Tldr extends Command
             return 1;
         }
 
-        $pageContent = Page::get($platform, $page);
+        $pageContent = Cache::get($page, $platform);
 
         if (! $pageContent) {
             $output->writeln("<error>{$page} command does not exist on the {$platform} platform</error>");
