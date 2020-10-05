@@ -44,7 +44,7 @@ class Tldr extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $platform = $input->getOption('platform');
         $page = $input->getArgument('page');
@@ -55,7 +55,7 @@ class Tldr extends Command
 
         if ($input->getOption('update')) {
             Page::update();
-            return;
+            return 0;
         }
 
         if (! $page) {
@@ -71,6 +71,7 @@ class Tldr extends Command
         }
 
         $output->writeln($pageContent);
+        return 0;
     }
 
     private function getHelpText()
