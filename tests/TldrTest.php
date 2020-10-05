@@ -14,7 +14,7 @@ class TldrTest extends TestCase
      */
     private $commandTester;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->commandTester = new CommandTester(new Tldr);
     }
